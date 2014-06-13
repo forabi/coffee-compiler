@@ -1,7 +1,7 @@
 {
   "name": "coffee-compiler",
   "main": "./lib/coffee-compiler",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Quickly compile CoffeeScript code in the editor to JavaScript",
   "activationEvents": ["coffee-compiler:compile"],
   "repository": "https://github.com/atom/coffee-compiler",
