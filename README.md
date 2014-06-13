@@ -2,7 +2,7 @@
 
 Quickly compile CoffeeScript code to JavaScript.
 
-![Screenshot](./screenshot.gif)
+![Screenshot](https://raw.githubusercontent.com/forabi/coffee-compiler/master/screenshot.gif)
 
 ## Usage
 1. Optionally select some text, if nothing is selected, the whole file will be compiled.
