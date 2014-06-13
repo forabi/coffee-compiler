@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "Quickly compile CoffeeScript code in the editor to JavaScript",
   "activationEvents": ["coffee-compiler:compile"],
-  "repository": "https://github.com/atom/coffee-compiler",
+  "repository": "https://github.com/forabi/coffee-compiler",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
