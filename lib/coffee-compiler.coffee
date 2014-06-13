@@ -1,6 +1,6 @@
 { EditorView } = require 'atom'
 { compile } = require 'coffee-script'
-ids = { }
+# ids = { }
 
 module.exports =
     activate: (state) ->
@@ -19,7 +19,6 @@ module.exports =
 
         @editor.setGrammar atom.syntax.grammarForScopeName 'source.js'
         @editor.setText js
-        @editor.setPath
         @pane = atom.workspaceView.getActivePane()
         @pane.addItem @editor
         @pane.activateNextItem()
