@@ -14,14 +14,14 @@ module.exports =
         @pane = atom.workspaceView.getActivePane()
 
         try
-            js = compile coffee, bare: yes
+            output = compile coffee, bare: yes
+            editor.setGrammar atom.syntax.grammarForScopeName 'source.js'
         catch e
-            js = e.toString()
+            output = e.toString()
         finally
             view = @getView()
             editor = view.getEditor()
-            editor.setGrammar atom.syntax.grammarForScopeName 'source.js'
-            editor.setText js
+            editor.setText output
             @pane.addItem editor
             @pane.activateNextItem()
 
