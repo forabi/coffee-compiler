@@ -1,6 +1,6 @@
 { EditorView } = require 'atom'
 { compile } = require 'coffee-script'
-# ids = { }
+ids = { }
 
 module.exports =
     activate: (state) ->
@@ -10,16 +10,28 @@ module.exports =
         @coffeeEditor = atom.workspace.getActiveEditor()
         selection = @coffeeEditor.getSelection()
         coffee = selection.getText() || @coffeeEditor.getText()
-        js = compile coffee, bare: yes
 
-        @view = new EditorView mini: true
-        # @view = ids[@coffeeEditor.id] || ids[@coffeeEditor.id] = new EditorView mini: true
-
-        @editor = @view.getEditor()
-
-        @editor.setGrammar atom.syntax.grammarForScopeName 'source.js'
-        @editor.setText js
         @pane = atom.workspaceView.getActivePane()
-        @pane.addItem @editor
-        @pane.activateNextItem()
+
+        try
+            js = compile coffee, bare: yes
+        catch e
+            js = e.toString()
+        finally
+            view = @getView()
+            editor = view.getEditor()
+            editor.setGrammar atom.syntax.grammarForScopeName 'source.js'
+            editor.setText js
+            @pane.addItem editor
+            @pane.activateNextItem()
+
+    getView: ->
+        ids[@coffeeEditor.id] = (
+            view = ids[@coffeeEditor.id]
+            if view
+                editor = view.getEditor()
+                if not editor.isAlive() then view = new EditorView mini: yes
+                view
+            else new EditorView mini: yes
+        )
     # serialize: ->
