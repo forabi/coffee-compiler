@@ -15,12 +15,12 @@ module.exports =
 
         try
             output = compile coffee, bare: yes
-            editor.setGrammar atom.syntax.grammarForScopeName 'source.js'
         catch e
             output = e.toString()
         finally
             view = @getView()
             editor = view.getEditor()
+            editor.setGrammar atom.syntax.grammarForScopeName 'source.js'
             editor.setText output
             @pane.addItem editor
             @pane.activateNextItem()
