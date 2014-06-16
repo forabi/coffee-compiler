@@ -11,18 +11,19 @@ module.exports =
         selection = @coffeeEditor.getSelection()
         coffee = selection.getText() || @coffeeEditor.getText()
 
-        @pane = atom.workspaceView.getActivePane()
+        @view = @getView()
+        @editor = @view.getEditor()
 
         try
             output = compile coffee, bare: yes
+            @editor.setGrammar atom.syntax.grammarForScopeName 'source.js'
         catch e
             output = e.toString()
+            @editor.setGrammar atom.syntax.grammarForScopeName 'text.plain'
         finally
-            view = @getView()
-            editor = view.getEditor()
-            editor.setGrammar atom.syntax.grammarForScopeName 'source.js'
-            editor.setText output
-            @pane.addItem editor
+            @editor.setText output
+            @pane = atom.workspaceView.getActivePane()
+            @pane.addItem @editor
             @pane.activateNextItem()
 
     getView: ->
